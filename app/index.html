@@ -70,7 +70,10 @@
         <div id="myCarousel" class="carousel slide" ng-show="carouselActive()">
           <div class="carousel-inner">
             <div class="item active">
-              <canvas id="theapt" width="1341" height="906"></canvas>
+              <img src="/images/album-cover.jpg" ng-hide="musicPlaying" alt="David Warren EP" style="display:none;"/>
+              <canvas id="theapt" width="1341" height="906" ng-show="musicPlaying"></canvas>
+              <img class="logo-big" src="/images/logo-big.png" style="pointer-events:none;opacity:0.035;position:absolute;top:-20px;left:-10px;width:975px;height:180px;max-width:975px !important;max-height:180px !important;min-width:975px !important;min-height:180px !important;"/>
+
 
               <!--<img src="../assets/img/examples/slide-01.jpg" alt="">-->
 
@@ -102,12 +105,12 @@
           <footer>
             <p class="pull-right"><a href="javascript:void(0)" class="scrollToTop">Scroll To Top</a></p>
 
-            <p>&copy; 2012-2013 Dead Works &middot; <a ng-click="changeRoute('/privacy')">Privacy</a> &middot; <a
-              ng-click="changeRoute('/terms')">Terms</a></p>
+            <p>&copy; 2012-2013 Dead Works &middot; <a ng-click="changeRoute('/privacy')">Privacy Policy</a> <!--&middot; <a
+              ng-click="changeRoute('/terms')">Terms</a>--></p>
           </footer>
         </div>
 
-        <div id="tweet" style="top: 401px; display: block;" unselectable="on"></div>
+        <div id="tweet" class="item-animate" style="top: 401px; display: block;" unselectable="on"></div>
 
         <div id="stuff">
           <audio id="audio">
@@ -117,6 +120,10 @@
 
         <div id="note-to-play">
           <span class="mobile-tap">Tap</span><span class="desktop-click">Click</span> anywhere to see track info.
+        </div>
+
+        <div id="music-control">
+          <a class="pause-btn" ng-click="musicPlaying=!musicPlaying;"></a>
         </div>
 
 
@@ -169,12 +176,7 @@
                 $(".cartInfo").removeClass('open');
               });
 
-
-//              $("#demoShelf .simpleCart_shelfItem:eq(0)").css('left', '310px');
-//              $("#demoShelf .simpleCart_shelfItem:eq(1)").css('left', '171px');
-//              $("#demoShelf .simpleCart_shelfItem:eq(2)").css('left', '29px');
-              $("#demoShelf .simpleCart_shelfItem").delay(500).animateStep({css: {top: '0px'}, delay: 100, speed: 100});
-              $("#demoShelf .simpleCart_shelfItem").click(function(){
+              $("body").on('click', ".simpleCart_shelfItem", function(){
                 var clone = $(this).clone(), position = $(this).position(), bezier_params = {
                     start: {
                       x: position.left,
@@ -189,11 +191,15 @@
                     }
                   };
 
-                clone.appendTo('#demoShelf');
+                clone.appendTo($(this).closest('.item-animate'));
                 clone.find('.tooltip').hide();
                 clone.addClass('addDemoAnimation');
                 clone.animate({path: new $.path.bezier(bezier_params)}, 600);
 
+              });
+
+              $('body').on('click', '.item_add', function(){
+                $(this).closest('.simpleCart_shelfItem').remove();
               });
 
               //Check to see if the window is top if not then display button

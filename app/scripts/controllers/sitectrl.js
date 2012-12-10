@@ -4,6 +4,8 @@ DeadworksApp.controller('SiteCtrl', ['$scope', '$location', 'GlobalService', fun
   s.global = global;
   s.isHome = $location.path() == '/';
   s.currentRoute = s.isHome ? '/' : $location.path();
+  s.musicPlaying = true;
+
   s.headerLinks = [
     {label: 'Music', link: '/', active:true, useCarousel:true},
     {label: 'Merch', link: '/merch', active: false, useCarousel: false},

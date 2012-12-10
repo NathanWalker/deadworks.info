@@ -26,6 +26,24 @@ DeadworksApp.directive('dwMenu', ['$compile', function($compile){
         setupSimpleCart('home', scope, $compile);
       }
     });
+
+    scope.$watch('musicPlaying', function(val){
+      var $btn = angular.element('#music-control .pause-btn');
+      var $audio = angular.element('#audio');
+
+      if(activeMusicAnimation){
+        if (val){
+          $btn.removeClass('paused');
+          $audio.get(0).play();
+          activeMusicAnimation(true);
+        } else {
+          $btn.addClass('paused');
+          $audio.get(0).pause();
+          activeMusicAnimation(false);
+        }
+      }
+
+    });
   };
 
   return { restrict: 'A', link: linkFn };

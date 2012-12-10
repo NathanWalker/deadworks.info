@@ -15,7 +15,7 @@
   }
   #note-to-play {
     top: 36px;
-    left: 30px;
+    left: 5px;
   }
   .navbar {
     .brand {
@@ -34,6 +34,15 @@
   #cartPopover {
     top:50px !important;
     right:9px !important;
+  }
+  #demoShelf1 {
+    top: 52px;
+    left: -4px;
+  }
+
+  #demoShelf2 {
+    top: 165px;
+    left: -4px;
   }
 
   // Unfix the navbar
@@ -193,6 +202,16 @@
   #note-to-play {
     top: 60px;
     left: 320px;
+  }
+
+  #demoShelf1 {
+    top: 52px;
+    left: -4px;
+  }
+
+  #demoShelf2 {
+    top: 165px;
+    left: -4px;
   }
 
 }

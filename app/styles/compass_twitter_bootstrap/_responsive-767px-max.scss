@@ -12,7 +12,7 @@
   }
   #note-to-play {
     top: 30px;
-    left: 30px;
+    left: 5px;
   }
   .navbar {
     .brand {
@@ -24,6 +24,15 @@
       left: -23px;
       width:216px;
     }
+  }
+  #demoShelf1 {
+    top: 52px;
+    left: -4px;
+  }
+
+  #demoShelf2 {
+    top: 165px;
+    left: -4px;
   }
   // Negative indent the now static "fixed" navbar
   .navbar-fixed-top,
@@ -137,9 +146,19 @@
     }
   }
 
+  #demoShelf1 {
+    top: 52px;
+    left: -4px;
+  }
+
+  #demoShelf2 {
+    top: 165px;
+    left: -4px;
+  }
+
   #note-to-play {
     top: 30px;
-    left: 30px;
+    left: 5px;
   }
 
   // Smooth out the collapsing/expanding nav
