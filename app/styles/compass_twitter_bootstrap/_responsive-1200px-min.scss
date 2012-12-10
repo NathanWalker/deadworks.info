@@ -25,4 +25,17 @@
     margin-left: 0;
   }
 
+  .navbar {
+    .logo {
+      top: -7px !important;
+      left: -18px !important;
+      width: 216px !important;
+    }
+  }
+
+  #note-to-play {
+    top: 30px;
+    left: 30px;
+  }
+
 }

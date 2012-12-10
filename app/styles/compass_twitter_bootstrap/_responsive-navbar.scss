@@ -5,7 +5,7 @@
 
 // TABLETS AND BELOW
 // -----------------
-@media (max-width: $navbarCollapseWidth) {
+@media (max-width: 979px) {
 
   // UNFIX THE TOPBAR
   // ----------------
@@ -13,6 +13,29 @@
   body {
     padding-top: 0;
   }
+  #note-to-play {
+    top: 36px;
+    left: 30px;
+  }
+  .navbar {
+    .brand {
+      padding: 14px 20px 16px 100px;
+      margin: 4px 0 0 0;
+    }
+    .logo {
+      top: -11px;
+      left: -2px;
+      width: 216px;
+    }
+  }
+  .cartInfo {
+    top: 12px !important;
+  }
+  #cartPopover {
+    top:50px !important;
+    right:9px !important;
+  }
+
   // Unfix the navbar
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -32,12 +55,7 @@
     width: auto;
     padding: 0;
   }
-  // Account for brand name
-  .navbar .brand {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 0 0 0 -5px;
-  }
+
 
   // COLLAPSIBLE NAVBAR
   // ------------------
@@ -67,8 +85,7 @@
   .nav-collapse .nav > li > a,
   .nav-collapse .dropdown-menu a {
     padding: 9px 15px;
-    font-weight: bold;
-    color: $navbarLinkColor;
+    color: #eee;
     @include border-radius(3px);
   }
   // Buttons
@@ -160,7 +177,22 @@
   // Required to make the collapsing navbar work on regular desktops
   .nav-collapse.collapse {
     height: auto !important;
-    overflow: visible !important;
+    //overflow: visible !important;
+  }
+
+  .logo {
+    top:0px;
+    left: -1px;
+    width:280px;
+  }
+
+  #cartPopover {
+    right: 72px !important;
+  }
+
+  #note-to-play {
+    top: 60px;
+    left: 320px;
   }
 
 }

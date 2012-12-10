@@ -1,6 +1,6 @@
 'use strict';
 
-deadworksApp.controller('MainCtrl', function($scope) {
+DeadworksApp.controller('MainCtrl', function($scope) {
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',

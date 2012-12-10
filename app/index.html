@@ -6,13 +6,19 @@
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <title></title>
-        <meta name="description" content=""/>
-        <meta name="viewport" content="width=device-width"/>
-        <link rel="stylesheet" href="styles/main.css"/>
+        <title>Dead Works</title>
+      <meta name="author" content="ProXimity">
+      <meta name="description" content=""/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="styles/main.css"/>
+      <style>
+        [ng-cloak] {
+          display: none;
+        }
+      </style>
 
     </head>
-    <body ng-app="deadworksApp">
+    <body ng-app="DeadworksApp" ng-controller="SiteCtrl">
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -23,22 +29,195 @@
             <script src="scripts/vendor/json3.min.js"></script>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <div class="container" ng-view></div>
+        <!-- NAVBAR
+    ================================================== -->
+        <!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+        <div class="container navbar-wrapper" ng-cloak ng-class="{showovercontent:carouselActive()}">
 
-        <script src="scripts/vendor/angular.js"></script>
+          <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+              <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+              <div class="cartInfo"><span class="simpleCart_quantity">0</span> items</div>
+              <a class="btn btn-navbar" ng-click="toggleMenu()">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+
+
+              <a class="brand" ng-click="changeRoute('/')">
+                <img src="/images/logo-black.png" class="logo"/>
+              </a>
+
+              <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+              <div class="nav-collapse collapse" dw-menu>
+                <ul class="nav" style="float:right; text-align:right;">
+                  <li ng-repeat="nav in headerLinks" ng-class="{active:nav.active}"><a ng-click="changeRoute(nav.link)">{{nav.label}}</a>
+                  </li>
+                </ul>
+              </div>
+              <!--/.nav-collapse -->
+            </div>
+            <!-- /.navbar-inner -->
+          </div>
+          <!-- /.navbar -->
+
+        </div>
+        <!-- /.container -->
+
+        <!-- Carousel
+       ================================================== -->
+        <div id="myCarousel" class="carousel slide" ng-show="carouselActive()">
+          <div class="carousel-inner">
+            <div class="item active">
+              <canvas id="theapt" width="1341" height="906"></canvas>
+
+              <!--<img src="../assets/img/examples/slide-01.jpg" alt="">-->
+
+              <!--<div class="container">-->
+                <!--<div class="carousel-caption">-->
+                  <!--<h1>Exposure</h1>-->
+
+                  <!--<p class="lead">Information can be connected to reveal too much personal information.</p>-->
+                  <!--<a class="btn btn-large btn-primary" ng-click="showMsg('Coming soon!')">Learn more</a>-->
+                <!--</div>-->
+              <!--</div>-->
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        <!-- /.carousel -->
+
+
+        <!-- Marketing messaging and featurettes
+       ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <div class="container marketing" ng-class="{'content-page':!carouselActive()}">
+
+          <div ng-view></div>
+
+          <!-- FOOTER -->
+          <footer>
+            <p class="pull-right"><a href="javascript:void(0)" class="scrollToTop">Scroll To Top</a></p>
+
+            <p>&copy; 2012-2013 Dead Works &middot; <a ng-click="changeRoute('/privacy')">Privacy</a> &middot; <a
+              ng-click="changeRoute('/terms')">Terms</a></p>
+          </footer>
+        </div>
+
+        <div id="tweet" style="top: 401px; display: block;" unselectable="on"></div>
+
+        <div id="stuff">
+          <audio id="audio">
+            Your browser does not support the <code>audio</code> element.
+          </audio>
+        </div>
+
+        <div id="note-to-play">
+          <span class="mobile-tap">Tap</span><span class="desktop-click">Click</span> anywhere to see track info.
+        </div>
+
+
 
         <!-- build:js scripts/scripts.js -->
+        <script src="scripts/vendor/processing.min.js"></script>
+        <script src="scripts/vendor/modernizr-0.9.min.js"></script>
+        <script src="scripts/vendor/jquery-1.8.3.min.js"></script>
+        <script src="scripts/vendor/detectmobilebrowser.min.js"></script>
+        <script src="scripts/vendor/lodash.min.js"></script>
+        <script src="scripts/vendor/plugins.js"></script>
+        <script src="scripts/vendor/bootstrap.min.js"></script>
+        <script src="scripts/vendor/angular.min.js"></script>
+        <script src="scripts/vendor/angular-resource.min.js"></script>
+        <script src="scripts/vendor/angular-sanitize.min.js"></script>
+        <script src="scripts/vendor/simpleCart.js"></script>
+        <script src="scripts/vendor/apt18.js"></script>
+
         <script src="scripts/app.js"></script>
+        <script src="scripts/common/services-global.js"></script>
+        <script src="scripts/common/directives-global.js"></script>
+        <script src="scripts/controllers/sitectrl.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/merch.js"></script>
+        <script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/controllers/privacy.js"></script>
+        <script src="scripts/controllers/terms.js"></script>
+        <script src="scripts/controllers/cart.js"></script>
         <!-- endbuild -->
 
+        <script>
+          !function($){
+            $(document).ready(function(){
+              // carousel demo
+//              setTimeout(function(){
+//                $('#myCarousel').carousel();
+//              }, 1000);
+
+              $("#demoShelf .simpleCart_shelfItem").mouseenter(function(event){
+                $(this).find('.tooltip').addClass('in').fadeIn(200);
+              });
+              $("#demoShelf .simpleCart_shelfItem").mouseleave(function(event){
+                $(this).find('.tooltip').removeClass('in').fadeOut(200);
+              });
+              $(".cartInfo").toggle(function(){
+                $("#cartPopover").show();
+                $(".cartInfo").addClass('open');
+              }, function(){
+                $("#cartPopover").hide();
+                $(".cartInfo").removeClass('open');
+              });
+
+
+//              $("#demoShelf .simpleCart_shelfItem:eq(0)").css('left', '310px');
+//              $("#demoShelf .simpleCart_shelfItem:eq(1)").css('left', '171px');
+//              $("#demoShelf .simpleCart_shelfItem:eq(2)").css('left', '29px');
+              $("#demoShelf .simpleCart_shelfItem").delay(500).animateStep({css: {top: '0px'}, delay: 100, speed: 100});
+              $("#demoShelf .simpleCart_shelfItem").click(function(){
+                var clone = $(this).clone(), position = $(this).position(), bezier_params = {
+                    start: {
+                      x: position.left,
+                      y: 0,
+                      angle: -90
+                    },
+                    end: {
+                      x: 310,
+                      y: -210,
+                      angle: 180,
+                      length: .2
+                    }
+                  };
+
+                clone.appendTo('#demoShelf');
+                clone.find('.tooltip').hide();
+                clone.addClass('addDemoAnimation');
+                clone.animate({path: new $.path.bezier(bezier_params)}, 600);
+
+              });
+
+              //Check to see if the window is top if not then display button
+              $(window).scroll(function(){
+                if ($(this).scrollTop() > 100){
+                  $('.scrollToTop').fadeIn();
+                } else {
+                  $('.scrollToTop').fadeOut();
+                }
+              });
+              //Click event to scroll to top
+              $('.scrollToTop').click(function(){
+                $('html, body').animate({scrollTop: 0}, 500);
+                return false;
+              });
+            });
+          }(window.jQuery)
+        </script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
+//            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+//            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+//            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+//            s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
     </body>
 </html>
